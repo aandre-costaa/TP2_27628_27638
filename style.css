@@ -1,0 +1,165 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: #000000d9;
+  padding: 20px;
+  width: 800px;
+}
+#boardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:10px solid lightgray;
+  border-radius: 5px;
+  margin-left:140px
+}
+.displayContainer {
+  display: flex;
+  height: 600px;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.score {
+  display: flex;
+  border: 8px solid lightgray;
+  margin: 10px;
+  margin-top:0;
+  margin-bottom: 0;
+  padding: 10px;
+  font-family: fantasy;
+  font-size: 30px;
+  color: #63f319;
+  justify-content: space-between;
+}
+.nextTetrimino {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 210px;
+  height: 120px;
+  border:10px solid lightgray;
+  margin: 10px;
+  margin-top:0px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.nextTetrimino img {
+  scale: 0.5;
+}
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 210px;
+  height: 110px;
+  border:10px solid lightgray;
+  margin:10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.titleContainer img {
+  width: 100%;
+}
+
+#endGameContainer {
+  position: absolute;
+  display: none;
+  width: 300px;
+  height: 260px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #109d76;
+  color: white;
+  border: 5px solid lightgray;
+  border-radius: 5px;
+  font-size: xx-large;
+  font-family: fantasy;
+}
+#scoreContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 80px;
+  border:5px solid lightgrey;
+  border-radius: 5px;
+}
+#gameMessage {
+  margin-top: 20px ;
+}
+#startGame {
+  width: 70px;
+  cursor: pointer;
+}
+#buttonContainer {
+  margin-bottom: 5px;
+}
+
+#boardContainer {
+  width: 320px;
+  height: 640px;
+  border: 10px solid lightgray;
+  border-radius: 5px;
+  position: relative;
+  background: #111;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#menuOverlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 5px;
+}
+
+#menu-title {
+  margin-bottom: 30px;
+  width: 180px;
+}
+
+.difficulty {
+  margin: 10px;
+  padding: 10px 40px;
+  font-size: 22px;
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.difficulty.selected {
+  background: #FFD700;
+  color: #222;
+  font-weight: bold;
+}
+
+#startGame {
+  margin-top: 30px;
+  padding: 14px 50px;
+  font-size: 26px;
+  background: #b35aa0;
+  color: #fff;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
