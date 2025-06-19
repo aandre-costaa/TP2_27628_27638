@@ -1,4 +1,4 @@
-export const tetriminos = {
+export const pieces = {
     i: [
         [
             [0,0,0,0],

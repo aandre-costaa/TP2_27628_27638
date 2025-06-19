@@ -12,8 +12,8 @@ export class MenuScene extends Phaser.Scene {
     preload() {
         this.load.image('title', './assets/Logo.png');
         this.load.image('button', './assets/startButton.png');
-        this.load.audio('bgMusic', './assets/Sound Effects/themeSong.mp3');
-        this.load.audio('clearLine', './assets/Sound Effects/clear-lines.mp3');
+        this.load.audio('bgMusic', './assets/soundEffects/themeSong.mp3');
+        this.load.audio('clearLine', './assets/soundEffects/clear-lines.mp3');
     }
 
     create() {

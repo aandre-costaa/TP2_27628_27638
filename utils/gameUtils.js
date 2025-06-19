@@ -1,10 +1,10 @@
-import { tetriminos } from '../data/tetriminos.js';
+import { pieces } from '../data/pieces.js';
 import { GAME_CONSTANTS } from '../config/gameConstants.js';
 
 export class GameUtils {
     static calculateBlockPositions(type, rotationState) {
         const positions = [];
-        const matrix = tetriminos[type][rotationState];
+        const matrix = pieces[type][rotationState];
         
         for (let i = 0; i < matrix.length; i++) {
             for (let j = 0; j < matrix[i].length; j++) {
@@ -16,7 +16,7 @@ export class GameUtils {
         return positions;
     }
 
-    static getRandomTetrimino() {
+    static getRandomPiece() {
         const types = ['i', 'o', 't', 's', 'z', 'j', 'l'];
         return types[Math.floor(Math.random() * types.length)];
     }

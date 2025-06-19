@@ -9,8 +9,8 @@ export class TetrisScene extends Phaser.Scene {
         super({ key: "TetrisScene" });
         this.gameBoard = [];
         this.blockSprites = [];
-        this.currentTetrimino = null;
-        this.nextTetrimino = null;
+        this.currentPiece = null;
+        this.nextPiece = null;
     }
 
     init(data) {
@@ -51,7 +51,7 @@ export class TetrisScene extends Phaser.Scene {
 
     if (gameState.elapsedTime >= moveDelay) {
         
-        this.moveCurrentTetrimino(0, 1);
+        this.moveCurrentPiece(0, 1);
         gameState.elapsedTime = 0;
     }
 }
@@ -66,9 +66,9 @@ export class TetrisScene extends Phaser.Scene {
         ScoreManager.resetScore();
         DOMHandler.hideEndGame();
 
-        this.nextTetrimino = GameUtils.getRandomTetrimino();
-        this.spawnTetrimino();
-        DOMHandler.updateNextTetrimino(this.nextTetrimino);
+        this.nextPiece = GameUtils.getRandomPiece();
+        this.spawnPiece();
+        DOMHandler.updateNextPiece(this.nextPiece);
     }
 
     clearBoard() {
@@ -83,12 +83,12 @@ export class TetrisScene extends Phaser.Scene {
         }
     }
 
-    spawnTetrimino() {
-        const type = this.nextTetrimino;
-        this.nextTetrimino = GameUtils.getRandomTetrimino();
-        DOMHandler.updateNextTetrimino(this.nextTetrimino);
+    spawnPiece() {
+        const type = this.nextPiece;
+        this.nextPiece = GameUtils.getRandomPiece();
+        DOMHandler.updateNextPiece(this.nextPiece);
 
-        this.currentTetrimino = {
+        this.currentPiece = {
             type: type,
             x: Math.floor(GAME_CONSTANTS.BOARD_WIDTH / 2) - 1,
             y: 0,
@@ -97,60 +97,60 @@ export class TetrisScene extends Phaser.Scene {
 
         if (!GameUtils.isValidPosition(
             this.gameBoard,
-            this.currentTetrimino.type,
-            this.currentTetrimino.rotationState,
-            this.currentTetrimino.x,
-            this.currentTetrimino.y
+            this.currentPiece.type,
+            this.currentPiece.rotationState,
+            this.currentPiece.x,
+            this.currentPiece.y
         )) {
             this.gameOver();
             return;
         }
 
-        this.drawCurrentTetrimino();
+        this.drawCurrentPiece();
     }
 
-    moveCurrentTetrimino(deltaX, deltaY) {
-        if (!this.currentTetrimino) return;
+    moveCurrentPiece(deltaX, deltaY) {
+        if (!this.currentPiece) return;
 
-        const newX = this.currentTetrimino.x + deltaX;
-        const newY = this.currentTetrimino.y + deltaY;
+        const newX = this.currentPiece.x + deltaX;
+        const newY = this.currentPiece.y + deltaY;
 
         if (GameUtils.isValidPosition(
             this.gameBoard,
-            this.currentTetrimino.type,
-            this.currentTetrimino.rotationState,
+            this.currentPiece.type,
+            this.currentPiece.rotationState,
             newX,
             newY
         )) {
-            this.clearCurrentTetrimino();
-            this.currentTetrimino.x = newX;
-            this.currentTetrimino.y = newY;
-            this.drawCurrentTetrimino();
+            this.clearCurrentPiece();
+            this.currentPiece.x = newX;
+            this.currentPiece.y = newY;
+            this.drawCurrentPiece();
         } else if (deltaY > 0) {
-            this.fixCurrentTetrimino();
+            this.fixCurrentPiece();
         }
     }
 
-    rotateTetrimino() {
-        if (!this.currentTetrimino) return;
+    rotatePiece() {
+        if (!this.currentPiece) return;
 
-        const numberOfStates = getNumberOfStates()[this.currentTetrimino.type];
-        let newRotationState = (this.currentTetrimino.rotationState + 1) % numberOfStates;
+        const numberOfStates = getNumberOfStates()[this.currentPiece.type];
+        let newRotationState = (this.currentPiece.rotationState + 1) % numberOfStates;
 
         if (GameUtils.isValidPosition(
             this.gameBoard,
-            this.currentTetrimino.type,
+            this.currentPiece.type,
             newRotationState,
-            this.currentTetrimino.x,
-            this.currentTetrimino.y
+            this.currentPiece.x,
+            this.currentPiece.y
         )) {
-            this.clearCurrentTetrimino();
-            this.currentTetrimino.rotationState = newRotationState;
-            this.drawCurrentTetrimino();
+            this.clearCurrentPiece();
+            this.currentPiece.rotationState = newRotationState;
+            this.drawCurrentPiece();
             return;
         }
 
-        const kicks = rotationStates[this.currentTetrimino.type][this.currentTetrimino.rotationState];
+        const kicks = rotationStates[this.currentPiece.type][this.currentPiece.rotationState];
         if (kicks) {
             for (let i = 0; i < kicks.length; i += 2) {
                 const kickX = kicks[i];
@@ -158,52 +158,52 @@ export class TetrisScene extends Phaser.Scene {
 
                 if (GameUtils.isValidPosition(
                     this.gameBoard,
-                    this.currentTetrimino.type,
+                    this.currentPiece.type,
                     newRotationState,
-                    this.currentTetrimino.x + kickX,
-                    this.currentTetrimino.y + kickY
+                    this.currentPiece.x + kickX,
+                    this.currentPiece.y + kickY
                 )) {
-                    this.clearCurrentTetrimino();
-                    this.currentTetrimino.rotationState = newRotationState;
-                    this.currentTetrimino.x += kickX;
-                    this.currentTetrimino.y += kickY;
-                    this.drawCurrentTetrimino();
+                    this.clearCurrentPiece();
+                    this.currentPiece.rotationState = newRotationState;
+                    this.currentPiece.x += kickX;
+                    this.currentPiece.y += kickY;
+                    this.drawCurrentPiece();
                     return;
                 }
             }
         }
     }
 
-    fixCurrentTetrimino() {
-        if (!this.currentTetrimino) return;
+    fixCurrentPiece() {
+        if (!this.currentPiece) return;
 
         const positions = GameUtils.calculateBlockPositions(
-            this.currentTetrimino.type,
-            this.currentTetrimino.rotationState
+            this.currentPiece.type,
+            this.currentPiece.rotationState
         );
 
         for (const pos of positions) {
-            const x = this.currentTetrimino.x + pos.x;
-            const y = this.currentTetrimino.y + pos.y;
+            const x = this.currentPiece.x + pos.x;
+            const y = this.currentPiece.y + pos.y;
 
             if (y >= 0) {
-                this.gameBoard[y][x] = this.currentTetrimino.type;
+                this.gameBoard[y][x] = this.currentPiece.type;
 
                 const sprite = this.add.rectangle(
                     x * GAME_CONSTANTS.BLOCK_SIZE + GAME_CONSTANTS.BLOCK_SIZE / 2,
                     y * GAME_CONSTANTS.BLOCK_SIZE + GAME_CONSTANTS.BLOCK_SIZE / 2,
                     GAME_CONSTANTS.BLOCK_SIZE - 2,
                     GAME_CONSTANTS.BLOCK_SIZE - 2,
-                    GAME_CONSTANTS.COLORS[this.currentTetrimino.type]
+                    GAME_CONSTANTS.COLORS[this.currentPiece.type]
                 );
                 sprite.setStrokeStyle(2, 0xFFFFFF);
                 this.blockSprites[y][x] = sprite;
             }
         }
 
-        this.currentTetrimino = null;
+        this.currentPiece = null;
         this.clearCompletedLines();
-        this.spawnTetrimino();
+        this.spawnPiece();
     }
 
     clearCompletedLines() {
@@ -249,17 +249,17 @@ export class TetrisScene extends Phaser.Scene {
         }
     }
 
-    drawCurrentTetrimino() {
-        if (!this.currentTetrimino) return;
+    drawCurrentPiece() {
+        if (!this.currentPiece) return;
 
         const positions = GameUtils.calculateBlockPositions(
-            this.currentTetrimino.type,
-            this.currentTetrimino.rotationState
+            this.currentPiece.type,
+            this.currentPiece.rotationState
         );
 
         for (const pos of positions) {
-            const x = this.currentTetrimino.x + pos.x;
-            const y = this.currentTetrimino.y + pos.y;
+            const x = this.currentPiece.x + pos.x;
+            const y = this.currentPiece.y + pos.y;
 
             if (y >= 0) {
                 const sprite = this.add.rectangle(
@@ -267,7 +267,7 @@ export class TetrisScene extends Phaser.Scene {
                     y * GAME_CONSTANTS.BLOCK_SIZE + GAME_CONSTANTS.BLOCK_SIZE / 2,
                     GAME_CONSTANTS.BLOCK_SIZE - 2,
                     GAME_CONSTANTS.BLOCK_SIZE - 2,
-                    GAME_CONSTANTS.COLORS[this.currentTetrimino.type]
+                    GAME_CONSTANTS.COLORS[this.currentPiece.type]
                 );
                 sprite.setStrokeStyle(2, 0xFFFFFF);
                 sprite.setData('temporary', true);
@@ -275,7 +275,7 @@ export class TetrisScene extends Phaser.Scene {
         }
     }
 
-    clearCurrentTetrimino() {
+    clearCurrentPiece() {
         const tempSprites = this.children.list.filter(child => child.getData('temporary'));
         tempSprites.forEach(sprite => sprite.destroy());
     }
@@ -286,20 +286,20 @@ export class TetrisScene extends Phaser.Scene {
         switch (event.code) {
             case 'ArrowLeft':
                 event.preventDefault();
-                this.moveCurrentTetrimino(-1, 0);
+                this.moveCurrentPiece(-1, 0);
                 break;
             case 'ArrowRight':
                 event.preventDefault();
-                this.moveCurrentTetrimino(1, 0);
+                this.moveCurrentPiece(1, 0);
                 break;
             case 'ArrowDown':
                 event.preventDefault();
-                this.moveCurrentTetrimino(0, 1);
+                this.moveCurrentPiece(0, 1);
                 break;
             case 'ArrowUp':
             case 'Space':
                 event.preventDefault();
-                this.rotateTetrimino();
+                this.rotatePiece();
                 break;
         }
     }

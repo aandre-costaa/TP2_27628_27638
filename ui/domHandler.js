@@ -44,10 +44,10 @@ export class DOMHandler {
         }
     }
 
-    static updateNextTetrimino(type) {
-        const nextTetriminoImage = document.getElementById('nextTetriminoImage');
-        if (nextTetriminoImage) {
-            nextTetriminoImage.src = `assets/Shape Blocks/${type.toUpperCase()}.png`;
+    static updateNextPiece(type) {
+        const nextPieceImage = document.getElementById('nextPieceImage');
+        if (nextPieceImage) {
+            nextPieceImage.src = `assets/pieces/${type.toUpperCase()}.png`;
         }
     }
 }

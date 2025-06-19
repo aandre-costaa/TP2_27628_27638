@@ -49,7 +49,7 @@ body {
   justify-content: space-between;
   border-radius: 8px;
 }
-.nextTetrimino {
+.nextPiece {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,7 +61,7 @@ body {
   padding: 16px;
   border-radius: 8px;
 }
-.nextTetrimino img {
+.nextPiece img {
   scale: 0.5;
 }
 .titleContainer {
