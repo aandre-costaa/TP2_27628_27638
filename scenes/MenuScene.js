@@ -2,9 +2,9 @@ export class MenuScene extends Phaser.Scene {
     constructor() {
         super({ key: 'MenuScene' });
         this.difficulties = [
-            { label: 'Easy', interval: 60 },
-            { label: 'Medium', interval: 20 },
-            { label: 'Hard', interval: 5 }
+            { label: 'Fácil', interval: 60 },
+            { label: 'Médio', interval: 20 },
+            { label: 'Difícil', interval: 5 }
         ];
         this.selectedDifficulty = 0;
     }
