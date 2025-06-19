@@ -10,8 +10,10 @@ export class MenuScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('title', './assets/Title/Title.png');
-        this.load.image('button', './assets/Title/play.png');
+        this.load.image('title', './assets/Logo.png');
+        this.load.image('button', './assets/startButton.png');
+        this.load.audio('bgMusic', './assets/Sound Effects/themeSong.mp3');
+        this.load.audio('clearLine', './assets/Sound Effects/clear-lines.mp3');
     }
 
     create() {
@@ -22,9 +24,9 @@ export class MenuScene extends Phaser.Scene {
             this.cameras.main.height,
         );
 
-        this.add.image(this.cameras.main.centerX, 120, 'title').setOrigin(0.5);
+        this.add.image(this.cameras.main.centerX, 140, 'title').setOrigin(0.5).setScale(0.8);
         
-        const buttonY = 240;
+        const buttonY = 280;
         const spacing = 60;
         this.difficultyButtons = [];
 
@@ -35,8 +37,8 @@ export class MenuScene extends Phaser.Scene {
                 diff.label, 
                 {
                     font: 'bold 28px Arial',
-                    color: i === this.selectedDifficulty ? '#FFD700' : '#fff',
-                    backgroundColor: i === this.selectedDifficulty ? '#444' : '#222',
+                    color: i === this.selectedDifficulty ? '#ffde59' : '#fff',
+                    backgroundColor: i === this.selectedDifficulty ? '#3c79eb' : '#232679',
                     padding: { left: 20, right: 20, top: 10, bottom: 10 }
                 }
             )
@@ -50,14 +52,10 @@ export class MenuScene extends Phaser.Scene {
             this.difficultyButtons.push(btn);
         });
 
-        const startButton = this.add.image(this.cameras.main.centerX, 450, 'button')
+        const startButton = this.add.image(this.cameras.main.centerX, 530, 'button')
             .setOrigin(0.5)
+            .setScale(0.5)
             .setInteractive({ useHandCursor: true });
-
-        this.add.text(this.cameras.main.centerX, 500, 'START', {
-            font: 'bold 28px Arial',
-            color: '#fff'
-        }).setOrigin(0.5);
 
         startButton.on('pointerdown', () => this.startGame());
     }
@@ -65,8 +63,8 @@ export class MenuScene extends Phaser.Scene {
     updateDifficultyButtons() {
         this.difficultyButtons.forEach((btn, i) => {
             btn.setStyle({
-                color: i === this.selectedDifficulty ? '#FFD700' : '#fff',
-                backgroundColor: i === this.selectedDifficulty ? '#444' : '#222'
+                color: i === this.selectedDifficulty ? '#ffde59' : '#fff',
+                backgroundColor: i === this.selectedDifficulty ? '#3c79eb' : '#232679'
             });
         });
     }

@@ -29,6 +29,13 @@ export class TetrisScene extends Phaser.Scene {
     create() {
         console.log("Dificuldade selecionada:", gameState.moveInterval);
         this.resetGame();
+
+        this.backgroundMusic = this.sound.add('bgMusic', {
+            loop: true,
+            volume: 0.5
+        });
+    
+        this.backgroundMusic.play();
     }
 
     update(time, delta) {
@@ -231,6 +238,13 @@ export class TetrisScene extends Phaser.Scene {
                 }
             }
 
+            this.clearLineSFX = this.sound.add('clearLine', {
+                loop: false,
+                volume: 0.5
+            });
+        
+            this.clearLineSFX.play();
+
             ScoreManager.updateScoreAndLevel(completedLines.length);
         }
     }
@@ -293,5 +307,10 @@ export class TetrisScene extends Phaser.Scene {
     gameOver() {
         gameState.gameOver = true;
         DOMHandler.displayEndGame();
+    }
+
+    goToMainMenu() {
+        this.resetGame();
+        this.scene.start('MenuScene');
     }
 }

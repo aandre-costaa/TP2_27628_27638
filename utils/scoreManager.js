@@ -5,13 +5,13 @@ export class ScoreManager {
         if (linesCleared > 0) {
             gameState.score += GAME_CONSTANTS.SCORES[linesCleared] * gameState.level;
             gameState.lines += linesCleared;
-            
+
             const newLevel = Math.floor(gameState.lines / GAME_CONSTANTS.LEVEL_MULTIPLIER) + 1;
             if (newLevel !== gameState.level) {
                 gameState.level = newLevel;
                 gameState.moveInterval = this.calculateMoveInterval();
             }
-            
+
             this.updateDisplay();
         }
     }
@@ -20,7 +20,7 @@ export class ScoreManager {
         const scoreElement = document.getElementById('scoreNumber');
         const linesElement = document.getElementById('linesNumber');
         const levelElement = document.getElementById('levelNumber');
-        
+
         if (scoreElement) scoreElement.innerText = gameState.score;
         if (linesElement) linesElement.innerText = gameState.lines;
         if (levelElement) levelElement.innerText = gameState.level;

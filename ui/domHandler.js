@@ -3,10 +3,16 @@ import { gameState } from '../config/gameConstants.js';
 export class DOMHandler {
     static initializeUI() {
         const startButton = document.getElementById("startGame");
-        if (startButton) {
+        const menuButton = document.getElementById("mainMenu");
+        if (startButton && menuButton) {
             startButton.addEventListener("click", () => {
                 if (window.game && window.game.scene.keys["TetrisScene"]) {
                     window.game.scene.keys["TetrisScene"].resetGame();
+                }
+            });
+            menuButton.addEventListener("click", () => {
+                if (window.game && window.game.scene.keys["TetrisScene"]) {
+                    window.game.scene.keys["TetrisScene"].goToMainMenu();
                 }
             });
         }

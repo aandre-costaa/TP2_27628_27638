@@ -6,13 +6,13 @@ export const GAME_CONSTANTS = {
     LEVEL_MULTIPLIER: 10,
     SCORES: [0, 40, 100, 300, 1200],
     COLORS: {
-        i: 0x00FFFF, 
-        o: 0xFFFF00, 
-        t: 0x800080, 
-        s: 0x00FF00, 
-        z: 0xFF0000, 
-        j: 0x0000FF, 
-        l: 0xFFA500  
+        i: 0x00FFFF,
+        o: 0xFFFF00,
+        t: 0x800080,
+        s: 0x00FF00,
+        z: 0xFF0000,
+        j: 0x0000FF,
+        l: 0xFFA500
     }
 };
 

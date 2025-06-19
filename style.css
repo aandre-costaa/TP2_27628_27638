@@ -1,39 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+* {
+  font-family: "VT323", monospace !important;
+  font-weight: 400;
+  font-style: normal !important;
+}
+
 body {
   display: flex;
   justify-content: center;
+  background-color: #000000d9;
 }
+
+#title {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+}
+
 .container {
   display: flex;
   justify-content: center;
-  background-color: #000000d9;
-  padding: 20px;
-  width: 800px;
+  align-items: center;
+  height: 100vh;
 }
 #boardContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  border:10px solid lightgray;
-  border-radius: 5px;
-  margin-left:140px
+  border: 10px solid lightgray;
+  border-radius: 8px;
+  margin-left: 140px;
 }
 .displayContainer {
   display: flex;
-  height: 600px;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: 16px;
 }
 .score {
   display: flex;
   border: 8px solid lightgray;
-  margin: 10px;
+  margin: 16px;
   margin-top:0;
-  margin-bottom: 0;
-  padding: 10px;
-  font-family: fantasy;
+  margin-bottom: 8px;
+  padding: 16px;
   font-size: 30px;
   color: #63f319;
   justify-content: space-between;
+  border-radius: 8px;
 }
 .nextTetrimino {
   display: flex;
@@ -42,10 +56,10 @@ body {
   width: 210px;
   height: 120px;
   border:10px solid lightgray;
-  margin: 10px;
+  margin: 16px;
   margin-top:0px;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 16px;
+  border-radius: 8px;
 }
 .nextTetrimino img {
   scale: 0.5;
@@ -57,9 +71,10 @@ body {
   width: 210px;
   height: 110px;
   border:10px solid lightgray;
-  margin:10px;
-  padding: 10px;
-  border-radius: 5px;
+  margin: 16px;
+  margin-top: 8px;
+  padding: 16px;
+  border-radius: 8px;
 }
 .titleContainer img {
   width: 100%;
@@ -68,18 +83,16 @@ body {
 #endGameContainer {
   position: absolute;
   display: none;
-  width: 300px;
-  height: 260px;
+  width: 290px;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   align-items: center;
-  background-color: #109d76;
+  background-color: #db081b;
   color: white;
-  border: 5px solid lightgray;
-  border-radius: 5px;
+  border: 10px solid lightgray;
+  border-radius: 8px;
   font-size: xx-large;
-  font-family: fantasy;
 }
 #scoreContainer {
   display: flex;
@@ -88,25 +101,26 @@ body {
   align-items: center;
   width: 250px;
   height: 80px;
-  border:5px solid lightgrey;
-  border-radius: 5px;
+  border: 10px solid lightgrey;
+  border-radius: 8px;
 }
 #gameMessage {
-  margin-top: 20px ;
+  margin-top: 32px ;
+  margin-bottom: 16px;
 }
 #startGame {
   width: 70px;
   cursor: pointer;
 }
 #buttonContainer {
-  margin-bottom: 5px;
+  margin-bottom: 16px;
 }
 
 #boardContainer {
   width: 320px;
   height: 640px;
   border: 10px solid lightgray;
-  border-radius: 5px;
+  border-radius: 8px;
   position: relative;
   background: #111;
   overflow: hidden;
@@ -126,17 +140,17 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 10;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 #menu-title {
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   width: 180px;
 }
 
 .difficulty {
-  margin: 10px;
-  padding: 10px 40px;
+  margin: 16px;
+  padding: 16px 32px;
   font-size: 22px;
   background: #444;
   color: #fff;
@@ -152,14 +166,13 @@ body {
   font-weight: bold;
 }
 
-#startGame {
-  margin-top: 30px;
-  padding: 14px 50px;
-  font-size: 26px;
-  background: #b35aa0;
-  color: #fff;
-  border-radius: 30px;
-  border: none;
+#startGame, #mainMenu {
+  margin-top: 48px;
   cursor: pointer;
-  font-family: inherit;
+  height: 64px;
+  width: auto;
+}
+
+#mainMenu {
+  margin-top: 0 !important;
 }
