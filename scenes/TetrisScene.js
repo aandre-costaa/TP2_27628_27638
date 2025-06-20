@@ -30,12 +30,13 @@ export class TetrisScene extends Phaser.Scene {
         console.log("Dificuldade selecionada:", gameState.moveInterval);
         this.resetGame();
 
-        this.backgroundMusic = this.sound.add('bgMusic', {
-            loop: true,
-            volume: 0.5
-        });
-    
-        this.backgroundMusic.play();
+        if (!this.backgroundMusic) {
+            this.backgroundMusic = this.sound.add('bgMusic', {
+                loop: true,
+                volume: 0.5
+            });
+            this.backgroundMusic.play();
+        }
     }
 
     update(time, delta) {
@@ -65,6 +66,11 @@ export class TetrisScene extends Phaser.Scene {
         this.clearBoard();
         ScoreManager.resetScore();
         DOMHandler.hideEndGame();
+
+        if (this.backgroundMusic && this.backgroundMusic.isPlaying) {
+            this.backgroundMusic.stop();
+            this.backgroundMusic.play();
+        }
 
         this.nextPiece = GameUtils.getRandomPiece();
         this.spawnPiece();
